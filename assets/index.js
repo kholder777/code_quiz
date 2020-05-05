@@ -1,4 +1,5 @@
 // Set the body to a variable.
+var body = document.body;
 
 // Create all necessary elements and tie them to a variable.
 
