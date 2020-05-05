@@ -17,6 +17,20 @@ var btnEL3 = document.createElement("button");
 var btnEL4 = document.createElement("button");
 
 // Store my list item elements in a variable.
+var listItems = document.getElementsByTagName("li");
+
+h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+h2El.setAttribute("style", "margin:auto; width:100%; text-align:center;");
+h3EL.setAttribute("style", "margin:auto; width 30%; text-align:center");
+pEL.setAttribute("text-align:center;");
+divEL.setAttribute("style", "margin:auto; width:50%; text-align:center;");
+olEl.setAttribute("style", "background:#333333; padding:20px;");
+li1.setAttribute("text-align:center;");
+li2.setAttribute("text-align:center;");
+li3.setAttribute("text-align:center;");
+btnEL1.setAttribute("text-align:center;");
+btnEL2.setAttribute("text-align:center;");
+btnEL3.setAttribute("text-align:center;");
 
 // Set the text content of relevant elements.
 
