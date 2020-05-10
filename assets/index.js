@@ -38,3 +38,33 @@ btnEL3.setAttribute("text-align:center;");
 // Append all the elements
 
 // Style all the elements
+
+// -----------questions below this line------------
+// 1) What is not a way to create a pop-up in JS?
+// x)surprise b)prompt c)alert d)confirm
+//
+// 2) To ________ is to increase a number by one.
+// x)increment b)add c)increase d)amplify
+//
+// 3) To ________ is to decrease a number by one.
+// x)decrement b)subtract c)decrease d)minus
+//
+// 4) Make this run, only if they are both true. (example === 5 ____ example === 10)
+// x)&& b)&> c)&| d)&=
+//
+// 5) Make this run, if at least one is true. (example === 5 ____ example === 10)
+// x)|| b)\\ c)-- d)><
+//
+// 6) The ______ statement is used to perform different actions based on different conditions.
+// x)switch b)decide c)action d)jump
+//
+// 7) The ______ statement "jumps out" of a loop.
+// x)break b)stop c)append d)quit
+//
+// 8) The ______ statement "jumps over" one iteration in the loop.
+// x)continue b)skip c)jump d)return
+//
+// 9) A JavaScript Boolean represents one of two values: true or false.
+// x)UP/DOWN b)YES / NO c)ON / OFF d)TRUE / FALSE
+//
+// 10)
