@@ -18,6 +18,7 @@ var btnEL4 = document.createElement("button");
 
 // Store my list item elements in a variable.
 var listItems = document.getElementsByTagName("li");
+var divItem = document.getElementsByTagName("div");
 
 h1El.setAttribute("style", "margin:auto; width:50%; text-align:center;");
 h2El.setAttribute("style", "margin:auto; width:100%; text-align:center;");
