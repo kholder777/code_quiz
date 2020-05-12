@@ -1,13 +1,11 @@
 // Create all necessary elements and tie them to a variable.
-
-var stBtn = document.getElementById("stBtn");
-var btnEL = document.createElement("button");
+var stBtn = document.getElementById("#stBtn");
+var question = document.querySelector("#question");
 var aButtonEL = document.querySelector("btnA");
-var bButtonEL2 = document.querySelector("btnB");
-var cButtonEL3 = document.querySelector("btnC");
-var dButtonEL4 = document.querySelector("btnD");
+var bButtonEL = document.querySelector("btnB");
+var cButtonEL = document.querySelector("btnC");
+var dButtonEL = document.querySelector("btnD");
 
-const startBtn = document.getElementById("stBtn");
 const nextBtn = document.getElementById("nxtBtn");
 const questionContainerEL = document.getElementById("question-container");
 const questionEL = document.getElementById("question");
@@ -20,13 +18,13 @@ var timerEl = document.querySelector("#timer");
 var MainBodyEL = document.getElementById("mainBody");
 
 //
+
 //
 
 //
 var shuffledQuestions, currentQuestionIndex;
 
-startBtn.addEventListener("click", startGame);
-//
+stBtn.addEventListener("click", startGame());
 function startGame() {
 	stBtn.classList.add("hide");
 	questionContainerEL.classList.remove("hide");
@@ -57,80 +55,80 @@ stBtn.addEventListener("click", function () {
 });
 
 // -----------questions below this line------------
-const question = [
+var question = [
 	{
-		question: "What is not a way to create a pop-up in JS?",
-		choiceA: "surprise",
-		choiceB: "prompt",
-		choiceC: "alert",
-		choiceD: "confirm",
+		question: "What is NOT a way to create a pop-up in JS?",
+		aButtonEL: "surprise",
+		bButtonEL: "prompt",
+		cButtonEL: "alert",
+		dButtonEL: "confirm",
 		answer: "a",
 	},
 	{
 		question: "To ________ is to increase a number by one.",
-		choiceA: "add",
-		choiceB: "increment",
-		choiceC: "increase",
-		choiceD: "amplify",
+		aButtonEL: "add",
+		bButtonEL: "increment",
+		cButtonEL: "increase",
+		dButtonEL: "amplify",
 		answer: "b",
 	},
 	{
 		question: "To ________ is to decrease a number by one.",
-		choiceA: "subtract",
-		choiceB: "decrease",
-		choiceC: "decrement",
-		choiceD: "minus",
+		aButtonEL: "subtract",
+		bButtonEL: "decrease",
+		cButtonEL: "decrement",
+		dButtonEL: "minus",
 		answer: "c",
 	},
 	{
 		question:
 			"Make this run, only if they are both true. (example === 5 ____ example === 10)",
-		choiceA: "&&",
-		choiceB: "&>",
-		choiceC: "&|",
-		choiceD: "&=",
+		aButtonEL: "&&",
+		bButtonEL: "&>",
+		cButtonEL: "&|",
+		dButtonEL: "&=",
 		answer: "a",
 	},
 	{
 		question:
 			"Make this run, if at least one is true. (example === 5 ____ example === 10)",
-		choiceA: "||",
-		choiceB: "//",
-		choiceC: "--",
-		choiceD: "><",
+		aButtonEL: "||",
+		bButtonEL: "//",
+		cButtonEL: "--",
+		dButtonEL: "><",
 		answer: "a",
 	},
 	{
 		question:
 			"The ______ statement is used to perform different actions based on different conditions.",
-		choiceA: "jump",
-		choiceB: "decide",
-		choiceC: "action",
-		choiceD: "switch",
+		aButtonEL: "jump",
+		bButtonEL: "decide",
+		cButtonEL: "action",
+		dButtonEL: "switch",
 		answer: "d",
 	},
 	{
 		question: 'The ______ statement "jumps out" of a loop.',
-		choiceA: "append",
-		choiceB: "stop",
-		choiceC: "break",
-		choiceD: "quit",
+		aButtonEL: "append",
+		bButtonEL: "stop",
+		cButtonEL: "break",
+		dButtonEL: "quit",
 		answer: "c",
 	},
 	{
 		question: 'The ______ statement "jumps over" one iteration in the loop.',
-		choiceA: "continue",
-		choiceB: "skip",
-		choiceC: "jump",
-		choiceD: "return",
+		aButtonEL: "continue",
+		bButtonEL: "skip",
+		cButtonEL: "jump",
+		dButtonEL: "return",
 		answer: "a",
 	},
 	{
 		question: "A JavaScript Boolean represents one of two values:",
-		choiceA: "UP / DOWN",
-		choiceB: "YES / NO",
-		choiceC: "ON / OFF",
-		choiceD: "TRUE / FALSE",
+		aButtonEL: "UP / DOWN",
+		bButtonEL: "YES / NO",
+		cButtonEL: "ON / OFF",
+		dButtonEL: "TRUE / FALSE",
 		answer: "d",
 	},
 ];
