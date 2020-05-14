@@ -1,61 +1,100 @@
 // Create all necessary elements and tie them to a variable.
-var stBtn = document.getElementById("#stBtn");
-var question = document.querySelector("#question");
-var aButtonEL = document.querySelector("btnA");
-var bButtonEL = document.querySelector("btnB");
-var cButtonEL = document.querySelector("btnC");
-var dButtonEL = document.querySelector("btnD");
-
-const nextBtn = document.getElementById("nxtBtn");
-const questionContainerEL = document.getElementById("question-container");
-const questionEL = document.getElementById("question");
-const answerButtonsEL = document.getElementById("answerButtons");
-
+var stBtnEL = document.getElementById("stBtn");
+var questionEL = document.querySelector("#question");
+var buttonAEL = document.querySelector("#btnA");
+var buttonBEL = document.querySelector("#btnB");
+var buttonCEL = document.querySelector("#btnC");
+var buttonDEL = document.querySelector("#btnD");
+var highScoreEL = document.querySelector("#highScore");
 var listItems = document.getElementsByTagName("li");
 var divItem = document.getElementsByTagName("div");
 
 var timerEl = document.querySelector("#timer");
-var MainBodyEL = document.getElementById("mainBody");
+var scoreBoardEL = document.getElementById("scoreBoard");
+let runningQuestionIndex = 0;
+var remainingTime = 9;
+var score = 0;
+var highScore;
 
-//
+// var hsName = prompt("Score: " + localScore + "Your name here");
 
-//
-
-//
-var shuffledQuestions, currentQuestionIndex;
-
-stBtn.addEventListener("click", startGame());
-function startGame() {
-	stBtn.classList.add("hide");
-	questionContainerEL.classList.remove("hide");
-	setNextQuestion();
-}
-function setNextQuestion() {}
-// add event listener for start quiz button (#stBtn).
-//
-stBtn.addEventListener("click", function () {
-	setTime();
-
-	// start game
-	//
-	// append body div material and populate first question.
-	var remainingTime = 2;
-
-	function setTime() {
-		var timerInterval = setInterval(function () {
-			remainingTime = remainingTime - 1;
-			timerEl.textContent = "You have " + remainingTime + " seconds remaining.";
-
-			if (remainingTime === 0) {
-				clearInterval(timerInterval);
-				timerEl.textContent = "Game Over";
-			}
-		}, 1000);
+// check answer function
+function checkAnswer() {
+	var choice = this.getAttribute("data-value");
+	console.log(runningQuestionIndex);
+	let q = questions[runningQuestionIndex];
+	if (choice === q.answer) {
+		remainingTime = remainingTime + 3;
+		score++;
+	} else {
+		remainingTime = remainingTime - 5;
 	}
+	scoreBoardEL.innerText = score;
+	runningQuestionIndex++;
+	if (runningQuestionIndex <= questions.length) {
+		generateQuestion();
+		console.log("running");
+	}
+}
+// start game button/function
+stBtnEL.addEventListener("click", function () {
+	generateQuestion();
+	setTime();
 });
+// create password generator
+function generateQuestion() {
+	let q = questions[runningQuestionIndex];
+	questionEL.innerHTML = q.question;
+	buttonAEL.innerHTML = q.aButtonEL;
+	buttonBEL.innerHTML = q.bButtonEL;
+	buttonCEL.innerHTML = q.cButtonEL;
+	buttonDEL.innerHTML = q.dButtonEL;
+}
 
+buttonAEL.addEventListener("click", checkAnswer);
+buttonBEL.addEventListener("click", checkAnswer);
+buttonCEL.addEventListener("click", checkAnswer);
+buttonDEL.addEventListener("click", checkAnswer);
+// timer
+function setTime() {
+	var timerInterval = setInterval(function () {
+		remainingTime = remainingTime - 1;
+		timerEl.textContent = "You have " + remainingTime + " seconds remaining.";
+		if (remainingTime <= 0) {
+			clearInterval(timerInterval);
+			scoreBoardEL.textContent = score;
+			newScore = score;
+			timerEl.textContent = "Game Over, man.";
+			questionEL.textContent = "";
+			buttonAEL.remove();
+			buttonBEL.remove();
+			buttonCEL.remove();
+			buttonDEL.remove();
+			stBtnEL.remove();
+			runningQuestionIndex = 0;
+			gameOver();
+		}
+	}, 1000);
+}
+function gameOver() {
+	// check new high score value.
+
+	// if the new high score is better than the existing, replace the existing.
+	if (newScore >= highScore) {
+		// replace existing
+		localStorage.setItem(newScore);
+		highScore = newScore;
+	} else {
+		// document write "not. good. e. nough."
+	}
+
+	if (localStorage.getItem("highScore")) {
+		highScore = localStorage.getItem("highScore");
+		highScoreEL.textContent = highScore;
+	}
+}
 // -----------questions below this line------------
-var question = [
+var questions = [
 	{
 		question: "What is NOT a way to create a pop-up in JS?",
 		aButtonEL: "surprise",
@@ -132,17 +171,16 @@ var question = [
 		answer: "d",
 	},
 ];
-var score = 0;
 
-for (var i = 0; i < question.length; i++) {
-	var response = window.question(question[i].question);
-	if (response === question[i].answer) {
-		score++;
-		// return "Correct!";
-	}
-	// else () {
-	// 	timer-10;
-	// 	return("Incorrect")
-	// }
-	// else if needs -5 seconds.
-}
+// for (var i = 0; i < question.length; i++) {
+// 	var response = question[i].question;
+// 	if (response === question[i].answer) {
+// 		score++;
+// return "Correct!";
+// }
+// else () {
+// 	timer-10;
+// 	return("Incorrect")
+// }
+// else if needs -5 seconds.
+// }
