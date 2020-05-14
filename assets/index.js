@@ -24,10 +24,10 @@ function checkAnswer() {
 	console.log(runningQuestionIndex);
 	let q = questions[runningQuestionIndex];
 	if (choice === q.answer) {
-		remainingTime = remainingTime + 3;
+		remainingTime = remainingTime + 4;
 		score++;
 	} else {
-		remainingTime = remainingTime - 5;
+		remainingTime = remainingTime - 6;
 	}
 	scoreBoardEL.innerText = score;
 	runningQuestionIndex++;
@@ -40,6 +40,7 @@ function checkAnswer() {
 stBtnEL.addEventListener("click", function () {
 	generateQuestion();
 	setTime();
+	stBtnEL.outerHTML = "";
 });
 // create password generator
 function generateQuestion() {
@@ -66,13 +67,14 @@ function setTime() {
 			newScore = score;
 			timerEl.textContent = "Game Over, man.";
 			questionEL.textContent = "";
-			buttonAEL.remove();
-			buttonBEL.remove();
-			buttonCEL.remove();
-			buttonDEL.remove();
-			stBtnEL.remove();
+			buttonAEL.outerHTML = "";
+			buttonBEL.outerHTML = "";
+			buttonCEL.outerHTML = "";
+			buttonDEL.outerHTML = "";
+			// stBtnEL.outerHTML = "";
 			runningQuestionIndex = 0;
 			gameOver();
+			// restart button?
 		}
 	}, 1000);
 }
@@ -80,19 +82,28 @@ function gameOver() {
 	// check new high score value.
 
 	// if the new high score is better than the existing, replace the existing.
-	if (newScore >= highScore) {
-		// replace existing
-		localStorage.setItem(newScore);
-		highScore = newScore;
-	} else {
-		// document write "not. good. e. nough."
-	}
+	// if (newScore > highScore) {
+	// replace existing
+	// highScore = newScore;
+	// function topScore() {
+	// let tempPlayer = JSON.parse(localStorage.getItem("playerName"));
+	// let tempScore = JSON.parse(localStorage.getItem('newScore"));
+	// scoreBoardEL.innerHTML = "";
+	// }
+	// } else {
+	// document write "not. good. enough."
+	// }
+	var highScore = localStorage.getItem("highScore");
+	if (highScore && newScore > highScore) {
+		highScoreEL.textContent = "highScore new!";
 
-	if (localStorage.getItem("highScore")) {
-		highScore = localStorage.getItem("highScore");
-		highScoreEL.textContent = highScore;
+		localStorage.setItem("highScore", newScore);
+	} else {
+		localStorage.setItem("highScore", newScore);
+		// add score as highScore.
 	}
 }
+
 // -----------questions below this line------------
 var questions = [
 	{
@@ -171,16 +182,3 @@ var questions = [
 		answer: "d",
 	},
 ];
-
-// for (var i = 0; i < question.length; i++) {
-// 	var response = question[i].question;
-// 	if (response === question[i].answer) {
-// 		score++;
-// return "Correct!";
-// }
-// else () {
-// 	timer-10;
-// 	return("Incorrect")
-// }
-// else if needs -5 seconds.
-// }
