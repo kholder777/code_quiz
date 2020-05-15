@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Quizzzzz!</title>
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Quizzzzz!</title>
-</head>
+	<body>
+		<h1>Javascript Quiz!</h1>
+		<h3 id="timer">Click start to play.</h3>
 
-<body>
-	<h1>Javascript Quiz!</h1>
-	<h3 id="timer">Click start to play.</h3>
-	<div id="highScore"></div>
-	<div id="scoreBoard"></div>
-	<div class="container">
-		<div id="question"></div>
-		<div id="answerButtons" class="buttonGrid">
-			<!-- change buttons to data values -->
-			<!-- get rid of the buttons! Use JS to append(?) the buttons -->
-			<button data-value="a" id="btnA"></button>
-			<button data-value="b" id="btnB"></button>
-			<button data-value="c" id="btnC"></button>
-			<button data-value="d" id="btnD"></button>
+		<div id="scoreBoard"></div>
+		<div class="container">
+			<div id="question"></div>
+			<div id="answerButtons" class="buttonGrid">
+				<!-- change buttons to data values -->
+				<!-- get rid of the buttons! Use JS to append(?) the buttons -->
+				<button data-value="a" id="btnA"></button>
+				<button data-value="b" id="btnB"></button>
+				<button data-value="c" id="btnC"></button>
+				<button data-value="d" id="btnD"></button>
+			</div>
 		</div>
-	</div>
-	<div class="controlButtons">
-		<button id="stBtn" class="startButton">START</button>
-	</div>
-	<script src="./assets/index.js"></script>
-</body>
-
+		<div class="controlButtons">
+			<button id="stBtn" class="startButton">START</button>
+			<form>
+				<input id="userName" />
+				<button id="submit">Submit</button>
+				<ul id="highScores"></ul>
+			</form>
+		</div>
+		<script src="./assets/index.js"></script>
+	</body>
 </html>
