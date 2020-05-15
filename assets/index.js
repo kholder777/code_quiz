@@ -5,35 +5,37 @@ var buttonAEL = document.querySelector("#btnA");
 var buttonBEL = document.querySelector("#btnB");
 var buttonCEL = document.querySelector("#btnC");
 var buttonDEL = document.querySelector("#btnD");
-var highScoreEL = document.querySelector("#highScore");
 var listItems = document.getElementsByTagName("li");
 var divItem = document.getElementsByTagName("div");
-
+var userName = document.getElementById("userName");
+var submit = document.getElementById("submit");
+var highScoreEL = document.getElementById("highScores");
 var timerEl = document.querySelector("#timer");
 var scoreBoardEL = document.getElementById("scoreBoard");
 let runningQuestionIndex = 0;
 var remainingTime = 9;
 var score = 0;
 var highScore;
-
 // var hsName = prompt("Score: " + localScore + "Your name here");
-
+// save the score in localStorage
+submit.style.display = "none";
+userName.style.display = "none";
 // check answer function
 function checkAnswer() {
 	var choice = this.getAttribute("data-value");
-	console.log(runningQuestionIndex);
+	// console.log(runningQuestionIndex);
 	let q = questions[runningQuestionIndex];
 	if (choice === q.answer) {
-		remainingTime = remainingTime + 4;
+		remainingTime = remainingTime + 3;
 		score++;
+		console.log("score is:", score);
 	} else {
-		remainingTime = remainingTime - 6;
+		remainingTime = remainingTime - 7;
 	}
 	scoreBoardEL.innerText = score;
 	runningQuestionIndex++;
 	if (runningQuestionIndex <= questions.length) {
 		generateQuestion();
-		console.log("running");
 	}
 }
 // start game button/function
@@ -42,7 +44,7 @@ stBtnEL.addEventListener("click", function () {
 	setTime();
 	stBtnEL.outerHTML = "";
 });
-// create password generator
+// create newestSuperScore generator
 function generateQuestion() {
 	let q = questions[runningQuestionIndex];
 	questionEL.innerHTML = q.question;
@@ -59,12 +61,11 @@ buttonDEL.addEventListener("click", checkAnswer);
 // timer
 function setTime() {
 	var timerInterval = setInterval(function () {
-		remainingTime = remainingTime - 1;
+		remainingTime -= 1;
 		timerEl.textContent = "You have " + remainingTime + " seconds remaining.";
 		if (remainingTime <= 0) {
 			clearInterval(timerInterval);
 			scoreBoardEL.textContent = score;
-			newScore = score;
 			timerEl.textContent = "Game Over, man.";
 			questionEL.textContent = "";
 			buttonAEL.outerHTML = "";
@@ -73,36 +74,92 @@ function setTime() {
 			buttonDEL.outerHTML = "";
 			// stBtnEL.outerHTML = "";
 			runningQuestionIndex = 0;
-			gameOver();
-			// restart button?
+			// gameOver();
+			// completeQuiz(score);
 		}
 	}, 1000);
 }
-function gameOver() {
-	// check new high score value.
 
-	// if the new high score is better than the existing, replace the existing.
-	// if (newScore > highScore) {
-	// replace existing
-	// highScore = newScore;
-	// function topScore() {
-	// let tempPlayer = JSON.parse(localStorage.getItem("playerName"));
-	// let tempScore = JSON.parse(localStorage.getItem('newScore"));
-	// scoreBoardEL.innerHTML = "";
-	// }
-	// } else {
-	// document write "not. good. enough."
-	// }
-	var highScore = localStorage.getItem("highScore");
-	if (highScore && newScore > highScore) {
-		highScoreEL.textContent = "highScore new!";
+// -----------------------------------------------------------------------------------------------------------semi-working code-----------------
+function completeQuiz(score, initials) {
+	// instructions.setAttribute("class", "hide");
+	// quizCont.setAttribute("class", "hide");
+	// endGame.removeAttribute("class", "hide");
+	// initials.removeAttribute("class", "hide");
+	// submit.style.display = "block";
+	userName.style.display = "block";
 
-		localStorage.setItem("highScore", newScore);
-	} else {
-		localStorage.setItem("highScore", newScore);
-		// add score as highScore.
-	}
+	// needs modified..............
+	var button = document.createElement("button");
+	button.innerText = "Save Score";
+	button.addEventListener("click", function (event) {
+		var Scores = JSON.parse(localStorage.getItem("Scores")) || [];
+		console.log(Scores);
+
+		Scores.push({
+			initials: document.getElementById("initials").value,
+			points: score,
+		});
+		console.log(Scores);
+		localStorage.setItem("Scores", JSON.stringify(Scores));
+
+		initials.setAttribute("class", "hide");
+		document.getElementById("Scores").setAttribute("class", "hide");
+
+		for (var i = 0; i < Scores.length; i++) {
+			var li = document.createElement("li");
+			li.innerHTML = Scores[i].initials + " " + Scores[i].points;
+			document.getElementById("highScores").append(li);
+		}
+		// why not displaying???
+	}); // save the player's score
+	// highScoreEL.append(button);
+	console.log("highScores");
+
+	// save the scores back in localstorage
+
+	// display the scoreboard
 }
+// ----------------------------------------------------------------------------------------------------------------------------------------
+// function gameOver() {
+// check new high score value.
+// if the new high score is better than the existing, replace the existing.
+// if (newScore > highScore) {
+// replace existing
+// highScore = newScore;
+// function topScore() {
+// let tempPlayer = JSON.parse(localStorage.getItem("playerName"));
+// let tempScore = JSON.parse(localStorage.getItem('newScore"));
+// scoreBoardEL.innerHTML = "";
+// }
+// } else {
+// document write "not. good. enough."
+// }
+// add score as highScore.
+// var highScore = localStorage.getItem("highScore");
+// if (highScore && newScore > highScore) {
+// 	highScoreEL.textContent = "highScore changed!!";
+// 	localStorage.setItem("highScore", newScore);
+// } else if (newScore <= highScore) {
+// 	// play again message?
+// 	// alert("try again?");{
+// 	// generateQuestion();
+// 	// setTime();}
+// } else {
+// 	localStorage.setItem("highScore", newScore);
+// 	highScoreEL.textContent = "highScore new!";
+// 	// create permanent scoreboard on page
+// }
+// submit.addEventListener("click", function (event) {
+// 	// this is where we click to submit the name
+// 	event.preventDefault();
+// 	var bestUser = highScore + " - " + userName.value.trim();
+// 	alert(bestUser);
+// 	localStorage.setItem("highScore", highScore);
+// 	// sends name to hall of fame?!
+// 	//  hall of fame needs to be populated on page at all times.
+// });
+// }
 
 // -----------questions below this line------------
 var questions = [
