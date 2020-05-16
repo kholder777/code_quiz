@@ -40,9 +40,10 @@ function checkAnswer() {
 }
 // start game button/function
 stBtnEL.addEventListener("click", function () {
+	console.log("stbtn runnig");
 	generateQuestion();
 	setTime();
-	stBtnEL.outerHTML = "";
+	stBtnEL.style.display = "none";
 });
 // create newestSuperScore generator
 function generateQuestion() {
@@ -68,11 +69,11 @@ function setTime() {
 			scoreBoardEL.textContent = score;
 			timerEl.textContent = "Game Over, man.";
 			questionEL.textContent = "";
-			buttonAEL.outerHTML = "";
-			buttonBEL.outerHTML = "";
-			buttonCEL.outerHTML = "";
-			buttonDEL.outerHTML = "";
-			// stBtnEL.outerHTML = "";
+			buttonAEL.style.display = "none";
+			buttonBEL.style.display = "none";
+			buttonCEL.style.display = "none";
+			buttonDEL.style.display = "none";
+			// stBtnEL.style.display = "none";
 			runningQuestionIndex = 0;
 			// gameOver();
 			completeQuiz();
@@ -114,6 +115,8 @@ function completeQuiz() {
 			document.getElementById("highScores").append(li);
 		}
 		userName.value = " ";
+		// stBtnEL.style.display = "block";
+		// stBtnEL.innerHTML = "Replay?";
 	}); // save the player's score
 	console.log("highScores");
 
